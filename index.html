@@ -8,14 +8,19 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Inter', sans-serif; background-color: #1a1a1a; }
+        
+        /* Força a cor branca nos botões para evitar o erro de carregamento */
+        .btn-modo1 { color: #ffffff !important; text-decoration: none; }
+        
         .glass-card {
             background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(8px);
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
+        
         .zoom-cursor { cursor: zoom-in; }
         
-        /* Efeito de degradê Verde para Azul */
+        /* Degradê Verde (Topo) e Azul (Baixo) */
         .titulo-bicolor {
             background: linear-gradient(to bottom, #4ade80 0%, #2563eb 100%);
             -webkit-background-clip: text;
@@ -43,11 +48,11 @@
         
         <div class="flex flex-col md:flex-row justify-center gap-4">
             <a href="https://github.com/Modo1-Br/1-Programa/releases/latest/download/Teleprompter.exe" 
-               class="bg-blue-600 text-white font-bold py-4 px-8 rounded-full transition duration-300 shadow-lg shadow-blue-500/30 transform hover:scale-102">
-               📥 Baixar Grátis (v1.0)
+               class="btn-modo1 bg-blue-600 font-bold py-4 px-8 rounded-full transition duration-300 shadow-lg shadow-blue-500/30 transform hover:scale-102">
+               📥 Baixar Grátis
             </a>
             <a href="https://wa.me/5562982187017" 
-               class="bg-[#25D366] text-white font-bold py-4 px-8 rounded-full transition duration-300 shadow-lg shadow-green-500/20 transform hover:scale-102">
+               class="btn-modo1 bg-[#25D366] font-bold py-4 px-8 rounded-full transition duration-300 shadow-lg shadow-green-500/20 transform hover:scale-102">
                💬 Suporte WhatsApp
             </a>
         </div>
@@ -57,42 +62,42 @@
         <div class="max-w-5xl mx-auto px-6 text-center">
             <h2 class="text-3xl md:text-4xl font-bold mb-10 titulo-bicolor">Conheça a Interface</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
-                <div class="glass-card p-3 rounded-2xl shadow-xl transition duration-300 transform hover:scale-[1.03] zoom-cursor" onclick="abrirModal('print1.png')">
+                <div class="glass-card p-3 rounded-2xl shadow-xl transition duration-300 transform hover:scale-102 zoom-cursor" onclick="abrirModal('print1.png')">
                     <img src="print1.png" alt="Interface Clara" class="rounded-xl w-full h-auto border border-gray-800">
-                    <p class="mt-4 text-sm text-gray-400 font-bold uppercase tracking-widest">Interface Clara e Intuitiva</p>
+                    <p class="mt-4 text-sm text-gray-400 font-bold uppercase tracking-widest">Interface Clara</p>
                 </div>
-                <div class="glass-card p-3 rounded-2xl shadow-xl transition duration-300 transform hover:scale-[1.03] zoom-cursor" onclick="abrirModal('print2.png')">
+                <div class="glass-card p-3 rounded-2xl shadow-xl transition duration-300 transform hover:scale-102 zoom-cursor" onclick="abrirModal('print2.png')">
                     <img src="print2.png" alt="Modo Escuro" class="rounded-xl w-full h-auto border border-gray-800">
-                    <p class="mt-4 text-sm text-gray-400 font-bold uppercase tracking-widest">Modo Escuro Profissional</p>
+                    <p class="mt-4 text-sm text-gray-400 font-bold uppercase tracking-widest">Modo Escuro</p>
                 </div>
             </div>
-            <p class="mt-8 text-gray-500 text-sm italic">Clique em qualquer imagem para ver em tamanho real</p>
+            <p class="mt-8 text-gray-500 text-sm italic font-bold">Clique em uma imagem para ampliar</p>
         </div>
     </section>
 
     <section class="bg-[#1a1a1a] py-20">
         <div class="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-10 text-center">
-            <div class="glass-card p-8 rounded-2xl border border-gray-800 hover:border-blue-500 transition duration-300 transform hover:scale-105">
+            <div class="glass-card p-8 rounded-2xl border border-gray-800 transition duration-300 transform hover:scale-102">
                 <div class="text-4xl mb-4 text-blue-500">🔒</div>
-                <h3 class="text-xl font-bold mb-2">Segurança Total</h3>
-                <p class="text-gray-400 text-sm">Licenciamento em nuvem com Supabase. Sua licença protegida por Hardware ID (Identificação de Hardware).</p>
+                <h3 class="text-xl font-bold mb-2 text-white">Segurança Total</h3>
+                <p class="text-gray-400 text-sm">Licenciamento em nuvem via Supabase. Sua licença vinculada à Identificação de Hardware (HWID).</p>
             </div>
-            <div class="glass-card p-8 rounded-2xl border border-gray-800 hover:border-green-500 transition duration-300 transform hover:scale-105">
+            <div class="glass-card p-8 rounded-2xl border border-gray-800 transition duration-300 transform hover:scale-102">
                 <div class="text-4xl mb-4 text-green-500">🌙</div>
-                <h3 class="text-xl font-bold mb-2">Modo Escuro Nativo</h3>
-                <p class="text-gray-400 text-sm">Conforto visual para ambientes escuros, igrejas e estúdios de gravação.</p>
+                <h3 class="text-xl font-bold mb-2 text-white">Modo Escuro Nativo</h3>
+                <p class="text-gray-400 text-sm">Ideal para apresentações em igrejas e estúdios de gravação profissional.</p>
             </div>
-            <div class="glass-card p-8 rounded-2xl border border-gray-800 hover:border-orange-500 transition duration-300 transform hover:scale-105">
+            <div class="glass-card p-8 rounded-2xl border border-gray-800 transition duration-300 transform hover:scale-102">
                 <div class="text-4xl mb-4 text-orange-500">🚀</div>
-                <h3 class="text-xl font-bold mb-2">Auto-Backup</h3>
-                <p class="text-gray-400 text-sm">Nunca perca seu texto. Salvamento automático a cada 3 segundos na sua máquina.</p>
+                <h3 class="text-xl font-bold mb-2 text-white">Auto-Backup</h3>
+                <p class="text-gray-400 text-sm">Salvamento local automático a cada 3 segundos. Nunca perca suas edições.</p>
             </div>
         </div>
     </section>
 
     <footer class="py-12 text-center text-gray-500 border-t border-gray-800">
-        <p class="font-bold text-gray-400">© 2026 Modo 1 - Todos os direitos reservados.</p>
-        <p class="text-xs mt-2 opacity-50 italic">Tecnologia de ponta para alta performance.</p>
+        <p class="font-bold text-gray-400 text-lg">© 2026 Modo 1</p>
+        <p class="text-xs mt-2 opacity-50 italic">Tecnologia avançada para estabilidade em apresentações.</p>
     </footer>
 
     <script>
@@ -110,4 +115,3 @@
 
 </body>
 </html>
-
