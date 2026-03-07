@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-br" data-theme="escuro">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,36 +8,72 @@
     <link rel="icon" type="image/x-icon" href="icone.ico">
     
     <script>
-        if (localStorage.getItem('modo1_tema') === 'claro') {
-            document.documentElement.classList.add('tema-claro');
-        }
+        try {
+            if (localStorage.getItem('modo1_tema') === 'claro') {
+                document.documentElement.setAttribute('data-theme', 'claro');
+            }
+        } catch(e) {} // Ignora o bloqueio de segurança local do Firefox
     </script>
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
     
     <style>
-        /* ========================================= */
-        /* MODO ESCURO (PADRÃO GLOBAL DO SITE)       */
-        /* ========================================= */
-        html, body { 
-            background-color: #1a1a1a; 
-            margin: 0; 
-            padding: 0; 
-            height: 100%;
+        /* Cores do Modo Escuro (Padrão) */
+        :root {
+            --cor-fundo-principal: #1a1a1a;
+            --cor-fundo-secao: #121212;
+            --cor-texto-titulo: #ffffff;
+            --cor-texto-paragrafo: #d1d5db; /* Cinza claro */
+            --cor-fundo-card: rgba(255, 255, 255, 0.05);
+            --cor-borda-card: rgba(255, 255, 255, 0.1);
+            --cor-borda-rodape: #374151; /* Cinza escuro */
         }
 
+        /* Cores do Modo Claro (Ativadas pelo botão) */
+        [data-theme="claro"] {
+            --cor-fundo-principal: #f9fafb;
+            --cor-fundo-secao: #ffffff;
+            --cor-texto-titulo: #111827; /* Quase preto */
+            --cor-texto-paragrafo: #4b5563; /* Cinza escuro */
+            --cor-fundo-card: rgba(0, 0, 0, 0.03);
+            --cor-borda-card: rgba(0, 0, 0, 0.1);
+            --cor-borda-rodape: #e5e7eb; /* Cinza muito claro */
+        }
+
+        /* 3. APLICAÇÃO DAS TINTAS (Sem forçar com !important) */
         body { 
+            background-color: var(--cor-fundo-principal); 
+            color: var(--cor-texto-titulo);
             font-family: 'Inter', sans-serif; 
-            color: white; 
+            margin: 0; 
+            padding: 0;
             transition: background-color 0.3s ease, color 0.3s ease;
         }
 
         .fundo-secao {
-            background-color: #121212;
+            background-color: var(--cor-fundo-secao);
             transition: background-color 0.3s ease;
         }
 
+        .texto-paragrafo {
+            color: var(--cor-texto-paragrafo);
+            transition: color 0.3s ease;
+        }
+
+        .glass-card {
+            background: var(--cor-fundo-card);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--cor-borda-card);
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+
+        footer {
+            border-top: 1px solid var(--cor-borda-rodape);
+            transition: border-color 0.3s ease;
+        }
+
+        /* Botões e Efeitos (Mantidos intactos) */
         .btn-modo1 { 
             color: #ffffff !important; 
             text-decoration: none !important; 
@@ -50,60 +86,16 @@
             filter: brightness(0.85); 
         }
 
-        .hover-zoom { 
-            transition: transform 0.3s ease, border-color 0.3s ease; 
-        }
-        
-        .hover-zoom:hover { 
-            transform: scale(1.02); 
-        }
-
-        .glass-card {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: background-color 0.3s ease, border-color 0.3s ease;
-        }
-        
+        .hover-zoom { transition: transform 0.3s ease, border-color 0.3s ease; }
+        .hover-zoom:hover { transform: scale(1.02); }
         .zoom-cursor { cursor: zoom-in; }
         
+        /* Título com as cores do seu escudo */
         .titulo-bicolor {
             background: linear-gradient(to bottom, #30A465 15%, #11578F 85%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             display: inline-block;
-        }
-
-        /* ========================================= */
-        /* REGRAS SEGURAS DO MODO CLARO (LIGHT MODE) */
-        /* ========================================= */
-        html.tema-claro body {
-            background-color: #f9fafb !important;
-            color: #111827 !important;
-        }
-        
-        html.tema-claro .fundo-secao {
-            background-color: #ffffff !important;
-        }
-
-        html.tema-claro .texto-mutavel,
-        html.tema-claro .text-gray-300,
-        html.tema-claro .text-gray-400,
-        html.tema-claro .text-gray-500 {
-            color: #4b5563 !important;
-        }
-
-        html.tema-claro .titulo-mutavel {
-            color: #111827 !important;
-        }
-
-        html.tema-claro .glass-card {
-            background: rgba(0, 0, 0, 0.03) !important;
-            border: 1px solid rgba(0, 0, 0, 0.1) !important;
-        }
-
-        html.tema-claro footer {
-            border-top-color: #e5e7eb !important;
         }
     </style>
 </head>
@@ -114,7 +106,7 @@
     </button>
 
     <script>
-        document.getElementById('iconeTema').textContent = document.documentElement.classList.contains('tema-claro') ? '🌙' : '☀️';
+        document.getElementById('iconeTema').textContent = document.documentElement.getAttribute('data-theme') === 'claro' ? '🌙' : '☀️';
     </script>
 
     <div id="modalImagem" class="fixed inset-0 z-50 hidden bg-black/95 flex items-center justify-center p-4" onclick="fecharModal()">
@@ -129,7 +121,7 @@
             Teleprompter & Slides
         </h1>
         
-        <p class="text-lg md:text-xl text-gray-300 mb-10 max-w-2xl mx-auto leading-relaxed texto-mutavel">
+        <p class="text-lg md:text-xl mb-10 max-w-2xl mx-auto leading-relaxed texto-paragrafo">
             A solução definitiva para oradores, pastores e criadores de conteúdo. Segurança em nuvem, controle de velocidade e visualização impecável.
         </p>
         
@@ -151,44 +143,44 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
                 <div class="glass-card p-4 rounded-3xl shadow-2xl hover-zoom zoom-cursor" onclick="abrirModal('print1.png')">
                     <img src="print1.png" alt="Interface Clara" class="rounded-2xl w-full h-auto border border-gray-800">
-                    <p class="mt-5 text-gray-300 font-bold uppercase tracking-widest text-sm text-center texto-mutavel">Interface Clara</p>
+                    <p class="mt-5 font-bold uppercase tracking-widest text-sm text-center texto-paragrafo">Interface Clara</p>
                 </div>
                 <div class="glass-card p-4 rounded-3xl shadow-2xl hover-zoom zoom-cursor" onclick="abrirModal('print2.png')">
                     <img src="print2.png" alt="Modo Escuro" class="rounded-2xl w-full h-auto border border-gray-800">
-                    <p class="mt-5 text-gray-300 font-bold uppercase tracking-widest text-sm text-center texto-mutavel">Modo Escuro</p>
+                    <p class="mt-5 font-bold uppercase tracking-widest text-sm text-center texto-paragrafo">Modo Escuro</p>
                 </div>
             </div>
-            <p class="mt-8 text-gray-500 text-sm italic font-bold texto-mutavel">Clique em uma imagem para ampliar</p>
+            <p class="mt-8 text-sm italic font-bold texto-paragrafo">Clique em uma imagem para ampliar</p>
         </div>
     </section>
 
     <section class="py-24">
         <div class="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-10 text-center">
-            <div class="glass-card p-10 rounded-3xl border border-gray-800 hover:border-blue-500 hover-zoom">
+            <div class="glass-card p-10 rounded-3xl hover:border-blue-500 hover-zoom">
                 <div class="text-5xl mb-6 text-blue-500">🔒</div>
-                <h3 class="text-xl font-bold mb-4 titulo-mutavel">Segurança Total</h3>
-                <p class="text-gray-400 text-sm leading-relaxed font-bold texto-mutavel">Licenciamento em nuvem via Supabase. Sua licença protegida por Hardware ID (HWID).</p>
+                <h3 class="text-xl font-bold mb-4">Segurança Total</h3>
+                <p class="text-sm leading-relaxed font-bold texto-paragrafo">Licenciamento em nuvem via Supabase. Sua licença protegida por Hardware ID (HWID).</p>
             </div>
-            <div class="glass-card p-10 rounded-3xl border border-gray-800 hover:border-green-500 hover-zoom">
+            <div class="glass-card p-10 rounded-3xl hover:border-green-500 hover-zoom">
                 <div class="text-5xl mb-6 text-green-500">🌙</div>
-                <h3 class="text-xl font-bold mb-2 titulo-mutavel">Modo Escuro Nativo</h3>
-                <p class="text-gray-400 text-sm leading-relaxed font-bold texto-mutavel">Conforto visual absoluto para ambientes de igreja e estúdios profissionais.</p>
+                <h3 class="text-xl font-bold mb-2">Modo Escuro Nativo</h3>
+                <p class="text-sm leading-relaxed font-bold texto-paragrafo">Conforto visual absoluto para ambientes de igreja e estúdios profissionais.</p>
             </div>
-            <div class="glass-card p-10 rounded-3xl border border-gray-800 hover:border-orange-500 hover-zoom">
+            <div class="glass-card p-10 rounded-3xl hover:border-orange-500 hover-zoom">
                 <div class="text-5xl mb-6 text-orange-500">🚀</div>
-                <h3 class="text-xl font-bold mb-4 titulo-mutavel">Auto-Backup</h3>
-                <p class="text-gray-400 text-sm leading-relaxed font-bold texto-mutavel">Salvamento automático a cada 3 segundos. Segurança total para o seu texto.</p>
+                <h3 class="text-xl font-bold mb-4">Auto-Backup</h3>
+                <p class="text-sm leading-relaxed font-bold texto-paragrafo">Salvamento automático a cada 3 segundos. Segurança total para o seu texto.</p>
             </div>
         </div>
     </section>
 
-    <footer class="py-16 text-center text-gray-500 border-t border-gray-800">
+    <footer class="py-16 text-center">
         <div class="max-w-6xl mx-auto px-6">
-            <p class="font-bold text-gray-300 text-lg mb-2 titulo-mutavel">© 2026 Modo 1 — Todos os direitos reservados.</p>
-            <p class="text-sm text-gray-500 max-w-md mx-auto mb-6 italic texto-mutavel">
+            <p class="font-bold text-lg mb-2">© 2026 Modo 1 — Todos os direitos reservados.</p>
+            <p class="text-sm max-w-md mx-auto mb-6 italic texto-paragrafo">
                 A solução de alta performance desenvolvida pela Modo 1.
             </p>
-            <div class="flex justify-center gap-6 text-xs uppercase tracking-widest text-gray-600 font-bold text-center texto-mutavel">
+            <div class="flex justify-center gap-6 text-xs uppercase tracking-widest font-bold text-center texto-paragrafo">
                 <span>Tecnologia Modo 1</span>
                 <span>•</span>
                 <span>Alta Performance</span>
@@ -208,20 +200,18 @@
             document.body.style.overflow = 'auto'; 
         }
 
+        /* 4. A TROCA DE TINTAS É FEITA AQUI (Infalível) */
         function alternarTema() {
-            // O comando 'toggle' atua como um interruptor físico. É imune a falhas.
-            document.documentElement.classList.toggle('tema-claro');
+            const root = document.documentElement;
+            const temaAtual = root.getAttribute('data-theme');
+            const novoTema = temaAtual === 'escuro' ? 'claro' : 'escuro';
             
-            const icone = document.getElementById('iconeTema');
+            root.setAttribute('data-theme', novoTema);
+            document.getElementById('iconeTema').textContent = novoTema === 'claro' ? '🌙' : '☀️';
             
-            // Grava a situação real da tela na memória
-            if (document.documentElement.classList.contains('tema-claro')) {
-                icone.textContent = '🌙';
-                localStorage.setItem('modo1_tema', 'claro');
-            } else {
-                icone.textContent = '☀️';
-                localStorage.setItem('modo1_tema', 'escuro');
-            }
+            try {
+                localStorage.setItem('modo1_tema', novoTema);
+            } catch(e) {}
         }
     </script>
 
