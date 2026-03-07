@@ -8,7 +8,6 @@
     <link rel="icon" type="image/x-icon" href="icone.ico">
     
     <style>
-        /* Trava de segurança imediata para o fundo escuro instantaneamente */
         html, body { 
             background-color: #1a1a1a !important; 
             margin: 0; 
@@ -23,7 +22,6 @@
     <style>
         body { font-family: 'Inter', sans-serif; color: white; }
         
-        /* Botões com cores sólidas e letras brancas reais */
         .btn-modo1 { 
             color: #ffffff !important; 
             text-decoration: none !important; 
@@ -31,13 +29,11 @@
             transition: transform 0.3s ease, filter 0.3s ease;
         }
 
-        /* Efeito de subir e escurecer visivelmente (0.85 = brilho reduzido) */
         .btn-efeito:hover {
             transform: translateY(-4px);
             filter: brightness(0.85); 
         }
 
-        /* Zoom estável apenas para cards e imagens */
         .hover-zoom { 
             transition: transform 0.3s ease, border-color 0.3s ease; 
         }
@@ -54,7 +50,6 @@
         
         .zoom-cursor { cursor: zoom-in; }
         
-        /* Título com Degradê baseado no seu escudo (#30A465 e #11578F) */
         .titulo-bicolor {
             background: linear-gradient(to bottom, #30A465 15%, #11578F 85%);
             -webkit-background-clip: text;
@@ -62,9 +57,7 @@
             display: inline-block;
         }
 
-        /* ========================================= */
-        /* REGRAS DO MODO CLARO (LIGHT MODE)         */
-        /* ========================================= */
+        /* Regras do Modo Claro */
         body.tema-claro {
             background-color: #f9fafb !important;
             color: #111827 !important;
@@ -143,25 +136,21 @@
 
     <section class="py-24">
         <div class="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-10 text-center">
-            
             <div class="glass-card p-10 rounded-3xl border border-gray-800 hover:border-blue-500 hover-zoom">
                 <div class="text-5xl mb-6 text-blue-500">🔒</div>
                 <h3 class="text-xl font-bold mb-4 text-white">Segurança Total</h3>
                 <p class="text-gray-400 text-sm leading-relaxed font-bold">Licenciamento em nuvem via Supabase. Sua licença protegida por Hardware ID (HWID).</p>
             </div>
-
             <div class="glass-card p-10 rounded-3xl border border-gray-800 hover:border-green-500 hover-zoom">
                 <div class="text-5xl mb-6 text-green-500">🌙</div>
                 <h3 class="text-xl font-bold mb-2 text-white">Modo Escuro Nativo</h3>
                 <p class="text-gray-400 text-sm leading-relaxed font-bold">Conforto visual absoluto para ambientes de igreja e estúdios profissionais.</p>
             </div>
-
             <div class="glass-card p-10 rounded-3xl border border-gray-800 hover:border-orange-500 hover-zoom">
                 <div class="text-5xl mb-6 text-orange-500">🚀</div>
                 <h3 class="text-xl font-bold mb-4 text-white">Auto-Backup</h3>
                 <p class="text-gray-400 text-sm leading-relaxed font-bold">Salvamento automático a cada 3 segundos. Segurança total para o seu texto.</p>
             </div>
-
         </div>
     </section>
 
@@ -191,15 +180,30 @@
             document.body.style.overflow = 'auto'; 
         }
 
-        /* Lógica para alternar entre Modo Claro e Escuro */
+        /* Verifica a memória ao carregar a página */
+        document.addEventListener('DOMContentLoaded', () => {
+            const temaSalvo = localStorage.getItem('modo1_tema');
+            const icone = document.getElementById('iconeTema');
+            
+            if (temaSalvo === 'claro') {
+                document.body.classList.add('tema-claro');
+                icone.textContent = '🌙';
+            } else {
+                icone.textContent = '☀️';
+            }
+        });
+
+        /* Lógica para alternar e salvar o tema */
         function alternarTema() {
             document.body.classList.toggle('tema-claro');
             const icone = document.getElementById('iconeTema');
             
             if (document.body.classList.contains('tema-claro')) {
-                icone.textContent = '🌙'; // Muda para a lua quando o fundo fica claro
+                icone.textContent = '🌙';
+                localStorage.setItem('modo1_tema', 'claro');
             } else {
-                icone.textContent = '☀️'; // Volta para o sol quando o fundo fica escuro
+                icone.textContent = '☀️';
+                localStorage.setItem('modo1_tema', 'escuro');
             }
         }
     </script>
