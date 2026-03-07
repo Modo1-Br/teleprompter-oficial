@@ -7,56 +7,67 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Inter', sans-serif; }
+        body { font-family: 'Inter', sans-serif; background-color: #1a1a1a; }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
     </style>
 </head>
-<body class="bg-[#121212] text-white">
+<body class="text-white">
 
-    <header class="max-w-6xl mx-auto px-6 py-16 text-center">
-        <img src="logo.png" alt="Logo Modo 1" class="mx-auto w-24 mb-6">
+    <header class="max-w-6xl mx-auto px-6 py-12 text-center">
+        <img src="logo.png" alt="Logo Modo 1" class="mx-auto w-24 mb-4">
         
-        <h1 class="text-5xl md:text-6xl font-extrabold mb-6 bg-gradient-to-r from-blue-500 to-green-400 bg-clip-text text-transparent">
+        <h1 class="text-5xl md:text-6xl font-extrabold mb-4 bg-gradient-to-r from-blue-500 to-green-400 bg-clip-text text-transparent">
             Teleprompter & Slides Modo 1
         </h1>
-        <p class="text-xl text-gray-400 mb-10 max-w-2xl mx-auto">
+        <p class="text-xl text-gray-400 mb-8 max-w-2xl mx-auto">
             A solução definitiva para oradores, pastores e criadores de conteúdo. Segurança em nuvem, controle de velocidade e visualização impecável.
         </p>
         
         <div class="flex flex-col md:flex-row justify-center gap-4">
             <a href="https://github.com/Modo1-Br/1-Programa/releases/latest/download/Teleprompter.exe" 
-               class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-8 rounded-full transition duration-300 shadow-lg shadow-blue-500/20">
+               class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-full transition duration-300 shadow-lg shadow-blue-500/30">
                📥 Baixar Grátis (v1.0)
             </a>
             <a href="https://wa.me/5562982187017" 
-               class="bg-transparent border-2 border-gray-600 hover:border-green-500 hover:text-green-500 text-white font-bold py-4 px-8 rounded-full transition duration-300">
+               class="bg-transparent border-2 border-gray-600 hover:border-green-500 hover:text-green-500 text-white font-bold py-3 px-8 rounded-full transition duration-300">
                💬 Suporte WhatsApp
             </a>
         </div>
     </header>
 
     <section class="py-10 bg-[#121212]">
-        <div class="max-w-6xl mx-auto px-6">
-            <h2 class="text-2xl font-bold mb-8 text-center text-blue-400">Conheça a Interface</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <img src="print1.png" alt="Demonstração 1" class="rounded-xl shadow-2xl border border-gray-800">
-                <img src="print2.png" alt="Demonstração 2" class="rounded-xl shadow-2xl border border-gray-800">
+        <div class="max-w-6xl mx-auto px-6 text-center">
+            <h2 class="text-3xl font-bold mb-8 text-blue-400">Conheça a Interface</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center justify-center">
+                <div class="glass-card p-4 rounded-2xl shadow-xl hover:scale-105 transition duration-300">
+                    <img src="print1.png" alt="Modo Claro" class="rounded-xl w-full h-auto">
+                    <p class="mt-4 text-gray-400">Interface Clara e Intuitiva</p>
+                </div>
+                <div class="glass-card p-4 rounded-2xl shadow-xl hover:scale-105 transition duration-300">
+                    <img src="print2.png" alt="Modo Escuro" class="rounded-xl w-full h-auto">
+                    <p class="mt-4 text-gray-400">Modo Escuro para Ambientes com Pouca Luz</p>
+                </div>
             </div>
         </div>
     </section>
 
-    <section class="bg-[#1a1a1a] py-20">
-        <div class="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-10">
-            <div class="p-8 rounded-2xl bg-[#252525] border border-gray-800 hover:border-blue-500 transition">
+    <section class="bg-[#1a1a1a] py-16">
+        <div class="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="glass-card p-8 rounded-2xl border border-gray-800 hover:border-blue-500 transition">
                 <div class="text-4xl mb-4 text-blue-500">🔒</div>
                 <h3 class="text-xl font-bold mb-2">Segurança Total</h3>
-                <p class="text-gray-400">Licenciamento em nuvem com Supabase. Sua licença protegida por Hardware ID (Identificação de Hardware).</p>
+                <p class="text-gray-400">Licenciamento em nuvem com Supabase. Sua licença protegida por Hardware ID.</p>
             </div>
-            <div class="p-8 rounded-2xl bg-[#252525] border border-gray-800 hover:border-green-500 transition">
+            <div class="glass-card p-8 rounded-2xl border border-gray-800 hover:border-green-500 transition">
                 <div class="text-4xl mb-4 text-green-500">🌙</div>
                 <h3 class="text-xl font-bold mb-2">Modo Escuro Nativo</h3>
                 <p class="text-gray-400">Conforto visual para ambientes escuros, igrejas e estúdios de gravação.</p>
             </div>
-            <div class="p-8 rounded-2xl bg-[#252525] border border-gray-800 hover:border-orange-500 transition">
+            <div class="glass-card p-8 rounded-2xl border border-gray-800 hover:border-orange-500 transition">
                 <div class="text-4xl mb-4 text-orange-500">🚀</div>
                 <h3 class="text-xl font-bold mb-2">Auto-Backup</h3>
                 <p class="text-gray-400">Nunca perca seu texto. Salvamento automático a cada 3 segundos na sua máquina.</p>
