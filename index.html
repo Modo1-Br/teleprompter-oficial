@@ -8,6 +8,7 @@
     <link rel="icon" type="image/x-icon" href="icone.ico">
     
     <style>
+        /* Trava de segurança imediata para o fundo escuro instantaneamente */
         html, body { 
             background-color: #1a1a1a !important; 
             margin: 0; 
@@ -20,11 +21,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
     
     <style>
-        body { 
-            font-family: 'Inter', sans-serif; 
-            color: white; 
-        }
-
+        body { font-family: 'Inter', sans-serif; color: white; }
+        
+        /* Botões com cores sólidas e letras brancas reais */
         .btn-modo1 { 
             color: #ffffff !important; 
             text-decoration: none !important; 
@@ -32,15 +31,16 @@
             transition: transform 0.3s ease, filter 0.3s ease;
         }
 
+        /* Efeito de subir e escurecer visivelmente (0.85 = brilho reduzido) */
         .btn-efeito:hover {
             transform: translateY(-4px);
-            filter: brightness(0.9); 
+            filter: brightness(0.85); 
         }
 
+        /* Zoom estável apenas para cards e imagens */
         .hover-zoom { 
             transition: transform 0.3s ease, border-color 0.3s ease; 
         }
-
         .hover-zoom:hover { 
             transform: scale(1.02); 
         }
@@ -52,12 +52,11 @@
             transition: background-color 0.3s ease, border-color 0.3s ease;
         }
         
-        .zoom-cursor { 
-            cursor: zoom-in; 
-        }
+        .zoom-cursor { cursor: zoom-in; }
         
+        /* Título com Degradê baseado no seu escudo (#30A465 e #11578F) */
         .titulo-bicolor {
-            background: linear-gradient(to bottom, #00FF00 15%, #0000FF 85%);
+            background: linear-gradient(to bottom, #30A465 15%, #11578F 85%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             display: inline-block;
@@ -93,21 +92,19 @@
 </head>
 <body>
 
-    <button onclick="alternarTema()" class="fixed top-5 left-5 text-3xl z-50 cursor-pointer" title="Alternar Tema">
+    <button onclick="alternarTema()" class="fixed top-5 right-5 text-3xl z-50 cursor-pointer" title="Alternar Tema">
         <span id="iconeTema">☀️</span>
     </button>
 
-    <div id="modalImagem" 
-         class="fixed inset-0 z-50 hidden bg-black/95 flex items-center justify-center p-4" 
-         onclick="fecharModal()">
+    <div id="modalImagem" class="fixed inset-0 z-50 hidden bg-black/95 flex items-center justify-center p-4" onclick="fecharModal()">
         <span class="absolute top-5 right-8 text-white text-5xl cursor-pointer font-bold">&times;</span>
         <img id="imgExpandida" src="" class="max-w-full max-h-[90vh] rounded-lg shadow-2xl border border-gray-700">
     </div>
 
-    <header class="max-w-6xl mx-auto px-6 py-16 text-center">
-        <img src="logo.png" alt="Logo" class="mx-auto w-24 mb-6 drop-shadow-lg">
+    <header class="max-w-6xl mx-auto px-6 py-12 text-center">
+        <img src="logo.png" alt="Logo Modo 1" class="mx-auto w-24 mb-0 drop-shadow-lg">
         
-        <h1 class="text-5xl md:text-7xl font-extrabold mb-6 titulo-bicolor leading-tight">
+        <h1 class="text-5xl md:text-7xl font-extrabold mb-6 mt-8 titulo-bicolor leading-tight">
             Teleprompter & Slides
         </h1>
         
@@ -117,12 +114,11 @@
         
         <div class="flex flex-col md:flex-row justify-center gap-6">
             <a href="https://github.com/Modo1-Br/1-Programa/releases/latest/download/Teleprompter.exe" 
-               class="btn-modo1 btn-efeito bg-blue-600 font-bold py-4 px-10 rounded-full shadow-lg shadow-blue-900/40 text-center">
+               class="btn-modo1 btn-efeito bg-blue-800 font-bold py-4 px-10 rounded-full shadow-lg shadow-blue-900/40 text-center">
                📥 Baixar Grátis
             </a>
-            
             <a href="https://wa.me/5562982187017" 
-               class="btn-modo1 btn-efeito bg-[#25D366] font-bold py-4 px-10 rounded-full shadow-lg shadow-green-900/40 text-center">
+               class="btn-modo1 btn-efeito bg-[#1da851] font-bold py-4 px-10 rounded-full shadow-lg shadow-green-900/40 text-center">
                💬 Suporte WhatsApp
             </a>
         </div>
@@ -130,16 +126,12 @@
 
     <section class="py-16 bg-[#121212]">
         <div class="max-w-5xl mx-auto px-6 text-center">
-            <h2 class="text-3xl md:text-4xl font-bold mb-12 titulo-bicolor text-center">
-                Conheça a Interface
-            </h2>
-            
+            <h2 class="text-3xl md:text-4xl font-bold mb-12 titulo-bicolor text-center">Conheça a Interface</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
                 <div class="glass-card p-4 rounded-3xl shadow-2xl hover-zoom zoom-cursor" onclick="abrirModal('print1.png')">
                     <img src="print1.png" alt="Interface Clara" class="rounded-2xl w-full h-auto border border-gray-800">
                     <p class="mt-5 text-gray-300 font-bold uppercase tracking-widest text-sm text-center">Interface Clara</p>
                 </div>
-                
                 <div class="glass-card p-4 rounded-3xl shadow-2xl hover-zoom zoom-cursor" onclick="abrirModal('print2.png')">
                     <img src="print2.png" alt="Modo Escuro" class="rounded-2xl w-full h-auto border border-gray-800">
                     <p class="mt-5 text-gray-300 font-bold uppercase tracking-widest text-sm text-center">Modo Escuro</p>
@@ -154,13 +146,13 @@
             
             <div class="glass-card p-10 rounded-3xl border border-gray-800 hover:border-blue-500 hover-zoom">
                 <div class="text-5xl mb-6 text-blue-500">🔒</div>
-                <h3 class="text-xl font-bold mb-4">Segurança Total</h3>
-                <p class="text-gray-400 text-sm leading-relaxed font-bold">Licenciamento em nuvem via Supabase. Sua licença protegida por Hardware ID (Identificação de Hardware).</p>
+                <h3 class="text-xl font-bold mb-4 text-white">Segurança Total</h3>
+                <p class="text-gray-400 text-sm leading-relaxed font-bold">Licenciamento em nuvem via Supabase. Sua licença protegida por Hardware ID (HWID).</p>
             </div>
 
             <div class="glass-card p-10 rounded-3xl border border-gray-800 hover:border-green-500 hover-zoom">
                 <div class="text-5xl mb-6 text-green-500">🌙</div>
-                <h3 class="text-xl font-bold mb-4 text-white">Modo Escuro Nativo</h3>
+                <h3 class="text-xl font-bold mb-2 text-white">Modo Escuro Nativo</h3>
                 <p class="text-gray-400 text-sm leading-relaxed font-bold">Conforto visual absoluto para ambientes de igreja e estúdios profissionais.</p>
             </div>
 
