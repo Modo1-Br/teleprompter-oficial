@@ -5,9 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <title>Teleprompter & Slides</title>
-    <link rel="icon" type="image/png" href="logo.png">
+    
+    <link rel="icon" type="image/x-icon" href="icone.ico">
     
     <style>
+        /* Define o fundo escuro imediatamente ao carregar */
         html, body { background-color: #1a1a1a !important; margin: 0; padding: 0; }
     </style>
 
@@ -24,12 +26,7 @@
             transition: transform 0.3s ease, filter 0.3s ease;
         }
 
-        /* --- CONTROLE DE BRILHO DOS BOTÕES --- */
-        /* Aqui você controla o brilho ao passar o mouse:
-           1.0 = Cor normal (sem brilho extra)
-           1.1 = 10% de brilho
-           0.9 = Fica um pouco mais escuro
-        */
+        /* Efeito de subir 4 pixels sem brilho extra (brilho em 1.0) */
         .btn-efeito:hover {
             transform: translateY(-4px);
             filter: brightness(1.0); 
@@ -50,6 +47,7 @@
         
         .zoom-cursor { cursor: zoom-in; }
         
+        /* Título com Degradê Verde e Azul */
         .titulo-bicolor {
             background: linear-gradient(to bottom, #4ade80 15%, #3b82f6 85%);
             -webkit-background-clip: text;
@@ -94,11 +92,11 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
                 <div class="glass-card p-4 rounded-3xl shadow-2xl hover-zoom zoom-cursor" onclick="abrirModal('print1.png')">
                     <img src="print1.png" alt="Interface Clara" class="rounded-2xl w-full h-auto border border-gray-800">
-                    <p class="mt-5 text-gray-300 font-bold uppercase tracking-widest text-sm">Interface Clara</p>
+                    <p class="mt-5 text-gray-300 font-bold uppercase tracking-widest text-sm text-center">Interface Clara</p>
                 </div>
                 <div class="glass-card p-4 rounded-3xl shadow-2xl hover-zoom zoom-cursor" onclick="abrirModal('print2.png')">
                     <img src="print2.png" alt="Modo Escuro" class="rounded-2xl w-full h-auto border border-gray-800">
-                    <p class="mt-5 text-gray-300 font-bold uppercase tracking-widest text-sm">Modo Escuro</p>
+                    <p class="mt-5 text-gray-300 font-bold uppercase tracking-widest text-sm text-center">Modo Escuro</p>
                 </div>
             </div>
             <p class="mt-8 text-gray-500 text-sm italic font-bold">Clique em uma imagem para ampliar</p>
@@ -135,7 +133,7 @@
             <p class="text-sm text-gray-500 max-w-md mx-auto mb-6">
                 Desenvolvido para oferecer máxima performance, segurança e estabilidade em apresentações profissionais.
             </p>
-            <div class="flex justify-center gap-6 text-xs uppercase tracking-widest text-gray-600 font-bold">
+            <div class="flex justify-center gap-6 text-xs uppercase tracking-widest text-gray-600 font-bold text-center">
                 <span>Tecnologia Modo 1</span>
                 <span>•</span>
                 <span>Alta Performance</span>
