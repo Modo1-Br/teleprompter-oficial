@@ -1,199 +1,155 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Teleprompter & Slides</title>
-    <link rel="icon" type="image/x-icon" href="icone.ico">
-    
-    <script>
-        try {
-            if (localStorage.getItem('modo1_tema') === 'claro') {
-                document.documentElement.classList.add('tema-claro');
-            }
-        } catch (erro) {
-            console.warn("Navegador bloqueou a memória local.");
-        }
-    </script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Teleprompter & Slides</title>
 
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
-    
-    <style>
-        :root {
-            --fundo-principal: #1a1a1a;
-            --fundo-secao: #121212;
-            --texto-titulo: #ffffff;
-            --texto-paragrafo: #d1d5db;
-            --fundo-card: rgba(255, 255, 255, 0.05);
-            --borda-card: rgba(255, 255, 255, 0.1);
-            --borda-rodape: #374151;
-        }
+<style>
 
-        html.tema-claro {
-            --fundo-principal: #f9fafb;
-            --fundo-secao: #ffffff;
-            --texto-titulo: #111827;
-            --texto-paragrafo: #4b5563;
-            --fundo-card: rgba(0, 0, 0, 0.03);
-            --borda-card: rgba(0, 0, 0, 0.1);
-            --borda-rodape: #e5e7eb;
-        }
+body{
+    margin:0;
+    font-family: Arial, Helvetica, sans-serif;
+    background:#0b0f14;
+    color:white;
+    text-align:center;
+}
 
-        html, body { 
-            background-color: var(--fundo-principal) !important; 
-            color: var(--texto-titulo) !important; 
-            margin: 0; padding: 0; 
-            transition: background-color 0.3s ease, color 0.3s ease;
-        }
+.container{
+    max-width:1100px;
+    margin:auto;
+    padding:40px 20px;
+}
 
-        .fundo-secao { 
-            background-color: var(--fundo-secao) !important; 
-            transition: background-color 0.3s ease; 
-        }
+.logo{
+    width:80px;
+    margin-bottom:20px;
+}
 
-        .texto-mutavel { 
-            color: var(--texto-paragrafo) !important; 
-            transition: color 0.3s ease; 
-        }
+h1{
+    font-size:48px;
+    margin-bottom:10px;
+}
 
-        .glass-card { 
-            background: var(--fundo-card) !important; 
-            border: 1px solid var(--borda-card) !important; 
-            backdrop-filter: blur(10px); 
-            transition: background-color 0.3s ease, border-color 0.3s ease; 
-        }
+.highlight{
+    color:#00e5ff;
+}
 
-        footer { 
-            border-top: 1px solid var(--borda-rodape) !important; 
-            transition: border-color 0.3s ease; 
-        }
+p{
+    color:#cfcfcf;
+    font-size:18px;
+    max-width:600px;
+    margin:auto;
+}
 
-        .btn-modo1 { 
-            color: #ffffff !important; 
-            text-decoration: none !important; 
-            display: inline-block; 
-            transition: transform 0.3s ease, filter 0.3s ease; 
-        }
+.buttons{
+    margin-top:30px;
+}
 
-        .btn-efeito:hover { 
-            transform: translateY(-4px); 
-            filter: brightness(0.85); 
-        }
+.btn{
+    padding:14px 28px;
+    border-radius:30px;
+    text-decoration:none;
+    font-weight:bold;
+    margin:10px;
+    display:inline-block;
+}
 
-        .titulo-bicolor { 
-            background: linear-gradient(to bottom, #30A465 15%, #11578F 85%); 
-            -webkit-background-clip: text; 
-            -webkit-text-fill-color: transparent; 
-            display: inline-block; 
-        }
+.btn-download{
+    background:#2563eb;
+    color:white;
+}
 
-        .hover-zoom { transition: transform 0.3s ease; }
-        .hover-zoom:hover { transform: scale(1.02); }
-        .zoom-cursor { cursor: zoom-in; }
-    </style>
+.btn-whatsapp{
+    background:#22c55e;
+    color:white;
+}
+
+.section{
+    margin-top:80px;
+}
+
+.section h2{
+    color:#00e5ff;
+}
+
+.images{
+    display:flex;
+    justify-content:center;
+    gap:40px;
+    margin-top:30px;
+    flex-wrap:wrap;
+}
+
+.card{
+    background:#111827;
+    padding:20px;
+    border-radius:10px;
+}
+
+.card img{
+    width:400px;
+    border-radius:6px;
+}
+
+.caption{
+    margin-top:10px;
+    color:#9ca3af;
+    font-size:14px;
+}
+
+</style>
+
 </head>
 <body>
 
-    <button onclick="alternarTema()" class="fixed top-5 right-5 text-3xl z-50 cursor-pointer" title="Alternar Tema">
-        <span id="iconeTema">☀️</span>
-    </button>
+<div class="container">
 
-    <script>
-        if (document.documentElement.classList.contains('tema-claro')) {
-            document.getElementById('iconeTema').textContent = '🌙';
-        }
-    </script>
+<img src="logo.png" class="logo">
 
-    <div id="modalImagem" class="fixed inset-0 z-50 hidden bg-black/95 flex items-center justify-center p-4" onclick="fecharModal()">
-        <span class="absolute top-5 right-8 text-white text-5xl cursor-pointer font-bold">&times;</span>
-        <img id="imgExpandida" src="" class="max-w-full max-h-[90vh] rounded-lg shadow-2xl border border-gray-700">
-    </div>
+<h1>
+<span class="highlight">Teleprompter</span> & Slides
+</h1>
 
-    <header class="max-w-6xl mx-auto px-6 py-12 text-center">
-        <img src="logo.png" alt="Logo Modo 1" class="mx-auto w-24 mb-0 drop-shadow-lg">
-        <h1 class="text-5xl md:text-7xl font-extrabold mb-6 mt-8 titulo-bicolor leading-tight">Teleprompter & Slides</h1>
-        <p class="text-lg md:text-xl mb-10 max-w-2xl mx-auto leading-relaxed texto-mutavel">
-            A solução definitiva para oradores, pastores e criadores de conteúdo. Segurança em nuvem, controle de velocidade e visualização impecável.
-        </p>
-        <div class="flex flex-col md:flex-row justify-center gap-6">
-            <a href="https://github.com/Modo1-Br/1-Programa/releases/latest/download/Teleprompter.exe" class="btn-modo1 btn-efeito bg-blue-800 font-bold py-4 px-10 rounded-full shadow-lg shadow-blue-900/40 text-center">📥 Baixar Grátis</a>
-            <a href="https://wa.me/5562982187017" class="btn-modo1 btn-efeito bg-[#1da851] font-bold py-4 px-10 rounded-full shadow-lg shadow-green-900/40 text-center">💬 Suporte WhatsApp</a>
-        </div>
-    </header>
+<p>
+A solução definitiva para oradores, pastores e criadores de conteúdo.
+Segurança em nuvem, controle de velocidade e visualização impecável.
+</p>
 
-    <section class="py-16 fundo-secao">
-        <div class="max-w-5xl mx-auto px-6 text-center">
-            <h2 class="text-3xl md:text-4xl font-bold mb-12 titulo-bicolor text-center">Conheça a Interface</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
-                <div class="glass-card p-4 rounded-3xl shadow-2xl hover-zoom zoom-cursor" onclick="abrirModal('print1.png')">
-                    <img src="print1.png" alt="Interface Clara" class="rounded-2xl w-full h-auto border border-gray-800">
-                    <p class="mt-5 font-bold uppercase tracking-widest text-sm text-center texto-mutavel">Interface Clara</p>
-                </div>
-                <div class="glass-card p-4 rounded-3xl shadow-2xl hover-zoom zoom-cursor" onclick="abrirModal('print2.png')">
-                    <img src="print2.png" alt="Modo Escuro" class="rounded-2xl w-full h-auto border border-gray-800">
-                    <p class="mt-5 font-bold uppercase tracking-widest text-sm text-center texto-mutavel">Modo Escuro</p>
-                </div>
-            </div>
-            <p class="mt-8 text-sm italic font-bold texto-mutavel">Clique em uma imagem para ampliar</p>
-        </div>
-    </section>
+<div class="buttons">
 
-    <section class="py-24">
-        <div class="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-10 text-center">
-            <div class="glass-card p-10 rounded-3xl hover-zoom">
-                <div class="text-5xl mb-6 text-blue-500">🔒</div>
-                <h3 class="text-xl font-bold mb-4">Segurança Total</h3>
-                <p class="text-sm leading-relaxed font-bold texto-mutavel">Licenciamento em nuvem via Supabase. Sua licença protegida por Hardware ID (HWID).</p>
-            </div>
-            <div class="glass-card p-10 rounded-3xl hover-zoom">
-                <div class="text-5xl mb-6 text-green-500">🌙</div>
-                <h3 class="text-xl font-bold mb-2">Modo Escuro Nativo</h3>
-                <p class="text-sm leading-relaxed font-bold texto-mutavel">Conforto visual absoluto para ambientes de igreja e estúdios profissionais.</p>
-            </div>
-            <div class="glass-card p-10 rounded-3xl hover-zoom">
-                <div class="text-5xl mb-6 text-orange-500">🚀</div>
-                <h3 class="text-xl font-bold mb-4">Auto-Backup</h3>
-                <p class="text-sm leading-relaxed font-bold texto-mutavel">Salvamento automático a cada 3 segundos. Segurança total para o seu texto.</p>
-            </div>
-        </div>
-    </section>
+<a href="#" class="btn btn-download">
+⬇ Baixar Grátis
+</a>
 
-    <footer class="py-16 text-center">
-        <div class="max-w-6xl mx-auto px-6">
-            <p class="font-bold text-lg mb-2">© 2026 Modo 1 — Todos os direitos reservados.</p>
-            <p class="text-sm max-w-md mx-auto mb-6 italic texto-mutavel">A solução de alta performance desenvolvida pela Modo 1.</p>
-            <div class="flex justify-center gap-6 text-xs uppercase tracking-widest font-bold text-center texto-mutavel">
-                <span>Tecnologia Modo 1</span><span>•</span><span>Alta Performance</span>
-            </div>
-        </div>
-    </footer>
+<a href="#" class="btn btn-whatsapp">
+Suporte WhatsApp
+</a>
 
-    <script>
-        function abrirModal(src) {
-            document.getElementById('imgExpandida').src = src;
-            document.getElementById('modalImagem').classList.remove('hidden');
-            document.body.style.overflow = 'hidden'; 
-        }
+</div>
 
-        function fecharModal() {
-            document.getElementById('modalImagem').classList.add('hidden');
-            document.body.style.overflow = 'auto'; 
-        }
 
-        function alternarTema() {
-            // A cor muda instantaneamente, imune a erros de memória
-            const estaClaro = document.documentElement.classList.toggle('tema-claro');
-            document.getElementById('iconeTema').textContent = estaClaro ? '🌙' : '☀️';
-            
-            // Tenta salvar na memória por último
-            try {
-                localStorage.setItem('modo1_tema', estaClaro ? 'claro' : 'escuro');
-            } catch (erro) {
-                console.warn("Navegador local bloqueou a gravação do tema.");
-            }
-        }
-    </script>
+<div class="section">
+
+<h2>Conheça a Interface</h2>
+
+<div class="images">
+
+<div class="card">
+<img src="interface-clara.png">
+<div class="caption">INTERFACE CLARA</div>
+</div>
+
+<div class="card">
+<img src="interface-escura.png">
+<div class="caption">MODO ESCURO</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
 
 </body>
 </html>
