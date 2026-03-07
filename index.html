@@ -12,6 +12,7 @@
             background-color: #1a1a1a !important; 
             margin: 0; 
             padding: 0; 
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
     </style>
 
@@ -31,7 +32,6 @@
             transition: transform 0.3s ease, filter 0.3s ease;
         }
 
-        /* Efeito de elevação e brilho ajustado (0.9 = mais sóbrio) */
         .btn-efeito:hover {
             transform: translateY(-4px);
             filter: brightness(0.9); 
@@ -49,22 +49,53 @@
             background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: background-color 0.3s ease, border-color 0.3s ease;
         }
         
         .zoom-cursor { 
             cursor: zoom-in; 
         }
         
-        /* Título com Degradê Verde e Azul oficial do escudo */
         .titulo-bicolor {
             background: linear-gradient(to bottom, #00FF00 15%, #0000FF 85%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             display: inline-block;
         }
+
+        /* ========================================= */
+        /* REGRAS DO MODO CLARO (LIGHT MODE)         */
+        /* ========================================= */
+        body.tema-claro {
+            background-color: #f9fafb !important;
+            color: #111827 !important;
+        }
+        
+        body.tema-claro section.bg-\[\#121212\] {
+            background-color: #ffffff !important;
+        }
+
+        body.tema-claro .text-gray-300,
+        body.tema-claro .text-gray-400,
+        body.tema-claro .text-gray-500 {
+            color: #4b5563 !important;
+        }
+
+        body.tema-claro .glass-card {
+            background: rgba(0, 0, 0, 0.03);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        body.tema-claro footer {
+            border-top-color: #e5e7eb;
+        }
     </style>
 </head>
 <body>
+
+    <button onclick="alternarTema()" class="fixed top-5 left-5 text-3xl z-50 cursor-pointer" title="Alternar Tema">
+        <span id="iconeTema">☀️</span>
+    </button>
 
     <div id="modalImagem" 
          class="fixed inset-0 z-50 hidden bg-black/95 flex items-center justify-center p-4" 
@@ -166,6 +197,18 @@
         function fecharModal() {
             document.getElementById('modalImagem').classList.add('hidden');
             document.body.style.overflow = 'auto'; 
+        }
+
+        /* Lógica para alternar entre Modo Claro e Escuro */
+        function alternarTema() {
+            document.body.classList.toggle('tema-claro');
+            const icone = document.getElementById('iconeTema');
+            
+            if (document.body.classList.contains('tema-claro')) {
+                icone.textContent = '🌙'; // Muda para a lua quando o fundo fica claro
+            } else {
+                icone.textContent = '☀️'; // Volta para o sol quando o fundo fica escuro
+            }
         }
     </script>
 
