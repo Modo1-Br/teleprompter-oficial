@@ -59,12 +59,14 @@
         
         .zoom-cursor { cursor: zoom-in; }
         
-        /* Degradê com as cores exatas do seu escudo */
+        /* Degradê com as cores exatas do seu escudo e Brilho Suave adicionado */
         .titulo-bicolor {
             background: linear-gradient(to bottom, #30A465 15%, #11578F 85%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             display: inline-block;
+            /* Aura de brilho combinando o verde e o azul */
+            filter: drop-shadow(0px 0px 12px rgba(48, 164, 101, 0.5)) drop-shadow(0px 0px 12px rgba(17, 87, 143, 0.5));
         }
     </style>
 </head>
@@ -88,11 +90,11 @@
         
         <div class="flex flex-col md:flex-row justify-center gap-6">
             <a href="https://github.com/Modo1-Br/1-Programa/releases/latest/download/Teleprompter.exe" 
-               class="btn-modo1 btn-efeito bg-blue-800 font-bold py-4 px-10 rounded-full shadow-lg shadow-blue-900/40 text-center">
+               class="btn-modo1 btn-efeito bg-blue-800 font-bold py-4 px-10 rounded-full text-center">
                📥 Baixar Grátis
             </a>
             <a href="https://wa.me/5562982187017" 
-               class="btn-modo1 btn-efeito bg-[#1da851] font-bold py-4 px-10 rounded-full shadow-lg shadow-green-900/40 text-center">
+               class="btn-modo1 btn-efeito bg-[#1da851] font-bold py-4 px-10 rounded-full text-center">
                💬 Suporte WhatsApp
             </a>
         </div>
