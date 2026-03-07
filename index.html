@@ -7,15 +7,21 @@
     <title>Teleprompter & Slides</title>
     <link rel="icon" type="image/x-icon" href="icone.ico">
     
+    <script>
+        if (localStorage.getItem('modo1_tema') === 'claro') {
+            document.documentElement.classList.add('tema-claro');
+        }
+    </script>
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
     
     <style>
-        /* Fundo escuro padrão blindado */
         html, body { 
             background-color: #1a1a1a; 
             margin: 0; 
             padding: 0; 
+            height: 100%;
         }
 
         body { 
@@ -61,32 +67,29 @@
         /* ========================================= */
         /* REGRAS SEGURAS DO MODO CLARO (LIGHT MODE) */
         /* ========================================= */
-        
-        html.tema-claro, body.tema-claro {
-            background-color: #f9fafb;
-            color: #111827;
+        html.tema-claro, html.tema-claro body {
+            background-color: #f9fafb !important;
+            color: #111827 !important;
         }
         
-        /* Isola a mudança de fundo apenas na seção do meio */
-        .tema-claro .secao-meio {
+        html.tema-claro .secao-meio {
             background-color: #ffffff !important;
         }
 
-        /* Isola a mudança de cor apenas nos textos específicos */
-        .tema-claro .texto-mutavel {
+        html.tema-claro .texto-mutavel {
             color: #4b5563 !important;
         }
 
-        .tema-claro .titulo-mutavel {
+        html.tema-claro .titulo-mutavel {
             color: #111827 !important;
         }
 
-        .tema-claro .glass-card {
+        html.tema-claro .glass-card {
             background: rgba(0, 0, 0, 0.03) !important;
             border: 1px solid rgba(0, 0, 0, 0.1) !important;
         }
 
-        .tema-claro footer {
+        html.tema-claro footer {
             border-top-color: #e5e7eb !important;
         }
 
@@ -94,6 +97,7 @@
         /* CONTROLE DE TRANSIÇÃO (EVITA PISCAR)      */
         /* ========================================= */
         .transicao-ativa, 
+        .transicao-ativa body,
         .transicao-ativa .secao-meio, 
         .transicao-ativa .texto-mutavel, 
         .transicao-ativa .titulo-mutavel, 
@@ -105,19 +109,12 @@
 </head>
 <body>
 
-    <script>
-        if (localStorage.getItem('modo1_tema') === 'claro') {
-            document.documentElement.classList.add('tema-claro');
-            document.body.classList.add('tema-claro');
-        }
-    </script>
-
     <button onclick="alternarTema()" class="fixed top-5 right-5 text-3xl z-50 cursor-pointer" title="Alternar Tema">
         <span id="iconeTema"></span>
     </button>
 
     <script>
-        document.getElementById('iconeTema').textContent = document.body.classList.contains('tema-claro') ? '🌙' : '☀️';
+        document.getElementById('iconeTema').textContent = document.documentElement.classList.contains('tema-claro') ? '🌙' : '☀️';
     </script>
 
     <div id="modalImagem" class="fixed inset-0 z-50 hidden bg-black/95 flex items-center justify-center p-4" onclick="fecharModal()">
@@ -214,14 +211,12 @@
         function alternarTema() {
             // Adiciona a classe de transição apenas no momento do clique
             document.documentElement.classList.add('transicao-ativa');
-            document.body.classList.add('transicao-ativa');
             
             document.documentElement.classList.toggle('tema-claro');
-            document.body.classList.toggle('tema-claro');
             
             const icone = document.getElementById('iconeTema');
             
-            if (document.body.classList.contains('tema-claro')) {
+            if (document.documentElement.classList.contains('tema-claro')) {
                 icone.textContent = '🌙';
                 localStorage.setItem('modo1_tema', 'claro');
             } else {
