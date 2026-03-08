@@ -3,258 +3,245 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <title>Teleprompter & Slides</title>
+    <title>Teleprompter & Slides | Modo 1</title>
     <link rel="icon" type="image/x-icon" href="icone.ico">
     
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
     <style>
-        /* ============================================================ */
-        /* CONFIGURAÇÃO DE CORES (VARIÁVEIS) */
-        /* ============================================================ */
         :root {
-            /* Modo Escuro (Padrão) */
-            --bg-principal: #1a1a1a;
-            --bg-secao: #121212;
-            --bg-card: rgba(255, 255, 255, 0.05);
+            --bg-principal: #0a0a0c;
+            --bg-secao: #111114;
+            --bg-card: rgba(255, 255, 255, 0.03);
             --texto-principal: #ffffff;
-            --texto-secundario: #d1d5db;
-            --borda-geral: rgba(255, 255, 255, 0.1);
+            --texto-secundario: #94a3b8;
+            --borda-geral: rgba(255, 255, 255, 0.08);
+            --cor-primaria: #1d4ed8;
+            --cor-secundaria: #24B329;
         }
 
         body.light-mode {
-            /* Modo Claro */
-            --bg-principal: #f3f4f6;
+            --bg-principal: #f8fafc;
             --bg-secao: #ffffff;
-            --bg-card: rgba(0, 0, 0, 0.05);
-            --texto-principal: #111827;
-            --texto-secundario: #4b5563;
-            --borda-geral: rgba(0, 0, 0, 0.1);
+            --bg-card: rgba(0, 0, 0, 0.02);
+            --texto-principal: #0f172a;
+            --texto-secundario: #64748b;
+            --borda-geral: rgba(0, 0, 0, 0.06);
         }
 
-        /* Força o fundo em toda a extensão da página */
-        html, body { 
-            background-color: var(--bg-principal) !important; 
-            margin: 0; 
-            padding: 0; 
-            min-height: 100vh; /* Garante que cubra toda a altura da tela visual */
-            width: 100%;
-            transition: background-color 0.3s ease;
+        * { font-family: 'Plus Jakarta Sans', sans-serif; transition: all 0.3s ease; }
+
+        body {
+            background-color: var(--bg-principal);
+            color: var(--texto-principal);
+            overflow-x: hidden;
         }
 
-        body { 
-            font-family: 'Inter', sans-serif; 
-            color: var(--texto-principal); 
-            display: flex;
-            flex-direction: column;
-        }
-    </style>
-
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
-    
-    <style>
-        .fundo-secao {
-            background-color: var(--bg-secao) !important;
+        /* Efeito de Luz no Fundo (Glow) */
+        .glow-bg {
+            position: fixed;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(29, 78, 216, 0.15) 0%, rgba(0,0,0,0) 70%);
+            border-radius: 50%;
+            z-index: -1;
+            filter: blur(60px);
         }
 
-        .btn-modo1 { 
-            color: #ffffff !important; 
-            text-decoration: none !important; 
-            display: inline-block;
-            transition: transform 0.3s ease, filter 0.3s ease;
-        }
-
-        .btn-efeito:hover {
-            transform: translateY(-4px);
-            filter: brightness(0.85); 
-        }
-
-        .hover-zoom { 
-            transition: transform 0.3s ease, border-color 0.3s ease; 
-        }
-        
-        .hover-zoom:hover { 
-            transform: scale(1.02); 
+        .titulo-bicolor {
+            background: linear-gradient(135deg, var(--cor-secundaria) 0%, var(--cor-primaria) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .glass-card {
-            background: var(--bg-card) !important;
-            backdrop-filter: blur(10px);
-            border: 1px solid var(--borda-geral) !important;
-        }
-        
-        .zoom-cursor { cursor: zoom-in; }
-        
-        .titulo-bicolor {
-            background: linear-gradient(to bottom, #24B329 25%, #1d4ed8 75%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            display: inline-block;
-        }
-
-        /* Botão de Alternar Tema no Header (Não Flutuante) */
-        .btn-tema-header {
             background: var(--bg-card);
+            backdrop-filter: blur(12px);
             border: 1px solid var(--borda-geral);
-            color: var(--texto-principal);
-            padding: 10px 24px;
-            border-radius: 50px;
-            font-size: 0.85rem;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            margin: 0 auto 40px auto;
-            text-transform: uppercase;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        .btn-tema-header:hover {
-            background: #1d4ed8;
-            color: white;
+        .glass-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(29, 78, 216, 0.5);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
         }
 
-        .btn-tema-header svg {
-            width: 20px;
-            height: 20px;
-            fill: currentColor;
+        .btn-glow:hover {
+            box-shadow: 0 0 20px rgba(29, 78, 216, 0.6);
+            transform: scale(1.05);
         }
+
+        .nav-blur {
+            backdrop-filter: blur(10px);
+            background: rgba(10, 10, 12, 0.8);
+            border-bottom: 1px solid var(--borda-geral);
+        }
+
+        .light-mode .nav-blur {
+            background: rgba(248, 250, 252, 0.8);
+        }
+
+        /* FAQ Estilo */
+        details summary { list-style: none; }
+        details summary::-webkit-details-marker { display: none; }
     </style>
 </head>
 <body>
 
+    <div class="glow-bg" style="top: -10%; right: -10%;"></div>
+    <div class="glow-bg" style="bottom: 10%; left: -10%; opacity: 0.5;"></div>
+
+    <nav class="fixed top-0 w-full z-40 nav-blur">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-2">
+                <img src="logo.png" class="w-8" alt="Logo">
+                <span class="font-extrabold tracking-tighter text-xl">MODO 1</span>
+            </div>
+            <div class="hidden md:flex gap-8 text-sm font-bold uppercase tracking-widest">
+                <a href="#inicio" class="hover:text-blue-500">Início</a>
+                <a href="#recursos" class="hover:text-blue-500">Recursos</a>
+                <a href="#faq" class="hover:text-blue-500">Dúvidas</a>
+            </div>
+            <button onclick="toggleTheme()" class="p-2 rounded-full glass-card">
+                <svg id="theme-icon" class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"></svg>
+            </button>
+        </div>
+    </nav>
+
     <div id="modalImagem" class="fixed inset-0 z-50 hidden bg-black/95 flex items-center justify-center p-4" onclick="fecharModal()">
-        <span class="absolute top-5 right-8 text-white text-5xl cursor-pointer font-bold">&times;</span>
-        <img id="imgExpandida" src="" class="max-w-full max-h-[90vh] rounded-lg shadow-2xl border border-gray-700">
+        <img id="imgExpandida" src="" class="max-w-full max-h-[90vh] rounded-xl shadow-2xl border border-white/10">
     </div>
 
-    <header class="max-w-6xl mx-auto px-6 py-12 text-center w-full">
-        <button class="btn-tema-header" onclick="toggleTheme()">
-            <svg id="theme-icon" viewBox="0 0 24 24">
-                <path d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1zM5.99 4.58a.996.996 0 00-1.41 0 .996.996 0 000 1.41l1.06 1.06c.39.39 1.03.39 1.42 0s.39-1.02 0-1.42L5.99 4.58zm12.37 12.37a.996.996 0 00-1.41 0 .996.996 0 000 1.41l1.06 1.06c.39.39 1.03.39 1.42 0a.996.996 0 000-1.41l-1.06-1.06zm1.06-10.96a.996.996 0 00-1.41-1.41l-1.06 1.06c-.39.39-.39 1.03 0 1.42s1.02.39 1.42 0l1.06-1.06zM7.05 18.36a.996.996 0 00-1.41-1.41l-1.06 1.06c-.39.39-.39 1.03 0 1.42s1.02.39 1.42 0l1.06-1.06z"/>
-            </svg>
-            <span id="theme-text">Trocar para Modo Claro</span>
-        </button>
-
-        <img src="logo.png" alt="Logo Modo 1" class="mx-auto w-24 mb-0 drop-shadow-lg">
-        
-        <h1 class="text-5xl md:text-7xl font-extrabold mb-6 mt-8 titulo-bicolor leading-tight">
-            Teleprompter & Slides
-        </h1>
-        
-        <p class="text-lg md:text-xl mb-10 max-w-2xl mx-auto leading-relaxed" style="color: var(--texto-secundario);">
-            A solução definitiva para oradores, pastores e criadores de conteúdo. Segurança em nuvem, controle de velocidade e visualização impecável.
-        </p>
-        
-        <div class="flex flex-col md:flex-row justify-center gap-6">
-            <a href="https://github.com/Modo1-Br/1-Programa/releases/latest/download/Teleprompter.exe" 
-               class="btn-modo1 btn-efeito bg-blue-800 font-bold py-4 px-10 rounded-full text-center">
-               📥 Baixar Grátis
-            </a>
-            <a href="https://wa.me/5562982187017" 
-               class="btn-modo1 btn-efeito bg-[#1da851] font-bold py-4 px-10 rounded-full text-center">
-               💬 Suporte WhatsApp
-            </a>
+    <header id="inicio" class="max-w-6xl mx-auto px-6 pt-40 pb-24 text-center">
+        <div data-aos="fade-up">
+            <span class="px-4 py-2 rounded-full bg-blue-500/10 text-blue-500 text-xs font-bold tracking-widest uppercase mb-6 inline-block border border-blue-500/20">
+                Lançamento 2026
+            </span>
+            <h1 class="text-6xl md:text-8xl font-extrabold mb-8 titulo-bicolor leading-[1.1] tracking-tighter">
+                Teleprompter <br>& Slides
+            </h1>
+            <p class="text-xl md:text-2xl mb-12 max-w-3xl mx-auto font-medium" style="color: var(--texto-secundario);">
+                Apresentações impecáveis com tecnologia de ponta. Sincronização em nuvem e controle absoluto da sua oratória.
+            </p>
+            
+            <div class="flex flex-col md:flex-row justify-center gap-6">
+                <a href="https://github.com/Modo1-Br/1-Programa/releases/latest/download/Teleprompter.exe" 
+                   class="btn-glow bg-blue-700 text-white font-bold py-5 px-12 rounded-2xl flex items-center justify-center gap-3">
+                   📥 Download Gratuito
+                </a>
+                <a href="https://wa.me/5562982187017" 
+                   class="glass-card font-bold py-5 px-12 rounded-2xl flex items-center justify-center gap-3">
+                   💬 Suporte Técnico
+                </a>
+            </div>
         </div>
     </header>
 
-    <section class="py-16 fundo-secao w-full">
-        <div class="max-w-5xl mx-auto px-6 text-center">
-            <h2 class="text-3xl md:text-4xl font-bold mb-12 titulo-bicolor">Conheça a Interface</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
-                <div class="glass-card p-4 rounded-3xl shadow-2xl hover-zoom zoom-cursor" onclick="abrirModal('print1.png')">
-                    <img src="print1.png" alt="Interface Clara" class="rounded-2xl w-full h-auto">
-                    <p class="mt-5 font-bold uppercase tracking-widest text-sm text-center" style="color: var(--texto-secundario);">Interface Clara</p>
-                </div>
-                <div class="glass-card p-4 rounded-3xl shadow-2xl hover-zoom zoom-cursor" onclick="abrirModal('print2.png')">
-                    <img src="print2.png" alt="Modo Escuro" class="rounded-2xl w-full h-auto">
-                    <p class="mt-5 font-bold uppercase tracking-widest text-sm text-center" style="color: var(--texto-secundario);">Modo Escuro</p>
-                </div>
-            </div>
-            <p class="mt-8 text-gray-500 text-sm italic font-bold">Clique em uma imagem para ampliar</p>
-        </div>
-    </section>
-
-    <section class="py-24 w-full">
-        <div class="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-10 text-center">
-            <div class="glass-card p-10 rounded-3xl hover-zoom">
-                <div class="text-5xl mb-6">🔒</div>
-                <h3 class="text-xl font-bold mb-4">Segurança Total</h3>
-                <p class="text-sm leading-relaxed font-bold" style="color: var(--texto-secundario);">Licenciamento em nuvem via Supabase. Sua licença protegida por Hardware ID (Identificação de Hardware).</p>
-            </div>
-            <div class="glass-card p-10 rounded-3xl hover-zoom">
-                <div class="text-5xl mb-6">🌙</div>
-                <h3 class="text-xl font-bold mb-2">Modo Escuro Nativo</h3>
-                <p class="text-sm leading-relaxed font-bold" style="color: var(--texto-secundario);">Conforto visual absoluto para ambientes de igreja e estúdios profissionais.</p>
-            </div>
-            <div class="glass-card p-10 rounded-3xl hover-zoom">
-                <div class="text-5xl mb-6">🚀</div>
-                <h3 class="text-xl font-bold mb-4">Auto-Backup</h3>
-                <p class="text-sm leading-relaxed font-bold" style="color: var(--texto-secundario);">Salvamento automático a cada 3 segundos. Segurança total para o seu texto.</p>
-            </div>
-        </div>
-    </section>
-
-    <footer class="py-16 text-center border-t w-full" style="border-color: var(--borda-geral);">
+    <section id="recursos" class="py-24 bg-secao relative overflow-hidden">
         <div class="max-w-6xl mx-auto px-6">
-            <p class="font-bold text-lg mb-2" style="color: var(--texto-secundario);">© 2026 Modo 1 — Todos os direitos reservados.</p>
-            <p class="text-sm max-w-md mx-auto mb-6 italic" style="color: var(--texto-secundario);">
-                A solução de alta performance desenvolvida pela Modo 1.
-            </p>
-            <div class="flex justify-center gap-6 text-xs uppercase tracking-widest text-gray-500 font-bold">
-                <span>Tecnologia Modo 1</span>
-                <span>•</span>
-                <span>Alta Performance</span>
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-4xl font-extrabold mb-4">Interface Inteligente</h2>
+                <p style="color: var(--texto-secundario);">Escolha o ambiente que melhor se adapta à sua visão.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <div class="glass-card p-2 rounded-[2rem]" data-aos="fade-right">
+                    <img src="print1.png" alt="Light Mode" class="rounded-[1.8rem] w-full cursor-zoom-in" onclick="abrirModal(this.src)">
+                </div>
+                <div class="glass-card p-2 rounded-[2rem]" data-aos="fade-left">
+                    <img src="print2.png" alt="Dark Mode" class="rounded-[1.8rem] w-full cursor-zoom-in" onclick="abrirModal(this.src)">
+                </div>
             </div>
         </div>
+    </section>
+
+    <section class="py-24 max-w-6xl mx-auto px-6">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="glass-card p-10 rounded-[2.5rem]" data-aos="zoom-in" data-aos-delay="100">
+                <div class="w-14 h-14 bg-blue-500/20 rounded-2xl flex items-center justify-center text-3xl mb-6">🛡️</div>
+                <h3 class="text-2xl font-bold mb-4">Hardware ID</h3>
+                <p style="color: var(--texto-secundario);">Segurança máxima. Sua licença é vinculada ao seu equipamento, evitando acessos indevidos.</p>
+            </div>
+            <div class="glass-card p-10 rounded-[2.5rem]" data-aos="zoom-in" data-aos-delay="200">
+                <div class="w-14 h-14 bg-green-500/20 rounded-2xl flex items-center justify-center text-3xl mb-6">☁️</div>
+                <h3 class="text-2xl font-bold mb-4">Supabase Cloud</h3>
+                <p style="color: var(--texto-secundario);">Banco de dados em tempo real. Suas configurações e textos salvos na nuvem com criptografia.</p>
+            </div>
+            <div class="glass-card p-10 rounded-[2.5rem]" data-aos="zoom-in" data-aos-delay="300">
+                <div class="w-14 h-14 bg-purple-500/20 rounded-2xl flex items-center justify-center text-3xl mb-6">⏱️</div>
+                <h3 class="text-2xl font-bold mb-4">Auto-Save</h3>
+                <p style="color: var(--texto-secundario);">Nunca perca uma linha. O sistema realiza o backup automático a cada 3 segundos de digitação.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="faq" class="py-24 max-w-4xl mx-auto px-6">
+        <h2 class="text-4xl font-extrabold text-center mb-12">Perguntas Frequentes</h2>
+        <div class="space-y-4">
+            <details class="glass-card p-6 rounded-2xl" data-aos="fade-up">
+                <summary class="font-bold cursor-pointer flex justify-between items-center">
+                    Como funciona o licenciamento?
+                    <span class="text-blue-500 text-xl">+</span>
+                </summary>
+                <p class="mt-4 text-sm" style="color: var(--texto-secundario);">O programa gera um ID único baseado nas peças do seu computador. Você envia esse ID ao suporte e liberamos sua chave de acesso vitalícia ou por período.</p>
+            </details>
+            <details class="glass-card p-6 rounded-2xl" data-aos="fade-up">
+                <summary class="font-bold cursor-pointer flex justify-between items-center">
+                    Preciso de internet para usar?
+                    <span class="text-blue-500 text-xl">+</span>
+                </summary>
+                <p class="mt-4 text-sm" style="color: var(--texto-secundario);">Apenas para a ativação inicial e verificação de licença. O teleprompter e o editor funcionam offline normalmente.</p>
+            </details>
+        </div>
+    </section>
+
+    <footer class="py-20 text-center border-t border-white/5">
+        <img src="logo.png" class="w-12 mx-auto mb-6 opacity-50" alt="Logo">
+        <p class="font-bold uppercase tracking-[0.3em] text-xs opacity-40">© 2026 MODO 1 TECHNOLOGY</p>
     </footer>
 
     <script>
+        AOS.init({ duration: 1000, once: true });
+
         function abrirModal(src) {
             document.getElementById('imgExpandida').src = src;
             document.getElementById('modalImagem').classList.remove('hidden');
-            document.body.style.overflow = 'hidden'; 
+            document.body.style.overflow = 'hidden';
         }
 
         function fecharModal() {
             document.getElementById('modalImagem').classList.add('hidden');
-            document.body.style.overflow = 'auto'; 
+            document.body.style.overflow = 'auto';
         }
 
-        const themeIconSun = 'M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1zM5.99 4.58a.996.996 0 00-1.41 0 .996.996 0 000 1.41l1.06 1.06c.39.39 1.03.39 1.42 0s.39-1.02 0-1.42L5.99 4.58zm12.37 12.37a.996.996 0 00-1.41 0 .996.996 0 000 1.41l1.06 1.06c.39.39 1.03.39 1.42 0a.996.996 0 000-1.41l-1.06-1.06zm1.06-10.96a.996.996 0 00-1.41-1.41l-1.06 1.06c-.39.39-.39 1.03 0 1.42s1.02.39 1.42 0l1.06-1.06zM7.05 18.36a.996.996 0 00-1.41-1.41l-1.06 1.06c-.39.39-.39 1.03 0 1.42s1.02.39 1.42 0l1.06-1.06z';
-        const themeIconMoon = 'M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-2.98 0-5.4-2.42-5.4-5.4 0-1.81.89-3.42 2.26-4.4-.44-.06-.9-.1-1.36-.1z';
+        const sunIcon = '<path d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1zM5.99 4.58a.996.996 0 00-1.41 0 .996.996 0 000 1.41l1.06 1.06c.39.39 1.03.39 1.42 0s.39-1.02 0-1.42L5.99 4.58zm12.37 12.37a.996.996 0 00-1.41 0 .996.996 0 000 1.41l1.06 1.06c.39.39 1.03.39 1.42 0a.996.996 0 000-1.41l-1.06-1.06zm1.06-10.96a.996.996 0 00-1.41-1.41l-1.06 1.06c-.39.39-.39 1.03 0 1.42s1.02.39 1.42 0l1.06-1.06zM7.05 18.36a.996.996 0 00-1.41-1.41l-1.06 1.06c-.39.39-.39 1.03 0 1.42s1.02.39 1.42 0l1.06-1.06z"/>';
+        const moonIcon = '<path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-2.98 0-5.4-2.42-5.4-5.4 0-1.81.89-3.42 2.26-4.4-.44-.06-.9-.1-1.36-.1z"/>';
 
         function toggleTheme() {
             const body = document.body;
-            const iconPath = document.querySelector('#theme-icon path');
-            const themeText = document.getElementById('theme-text');
-            
+            const icon = document.getElementById('theme-icon');
             if (body.classList.contains('light-mode')) {
                 body.classList.remove('light-mode');
-                iconPath.setAttribute('d', themeIconSun);
-                themeText.innerText = "Trocar para Modo Claro";
+                icon.innerHTML = sunIcon;
                 localStorage.setItem('theme', 'dark');
             } else {
                 body.classList.add('light-mode');
-                iconPath.setAttribute('d', themeIconMoon);
-                themeText.innerText = "Trocar para Modo Escuro";
+                icon.innerHTML = moonIcon;
                 localStorage.setItem('theme', 'light');
             }
         }
 
         window.onload = () => {
-            const savedTheme = localStorage.getItem('theme');
-            const iconPath = document.querySelector('#theme-icon path');
-            const themeText = document.getElementById('theme-text');
-
-            if (savedTheme === 'light') {
+            const icon = document.getElementById('theme-icon');
+            if (localStorage.getItem('theme') === 'light') {
                 document.body.classList.add('light-mode');
-                iconPath.setAttribute('d', themeIconMoon);
-                themeText.innerText = "Trocar para Modo Escuro";
+                icon.innerHTML = moonIcon;
             } else {
-                iconPath.setAttribute('d', themeIconSun);
-                themeText.innerText = "Trocar para Modo Claro";
+                icon.innerHTML = sunIcon;
             }
         };
     </script>
